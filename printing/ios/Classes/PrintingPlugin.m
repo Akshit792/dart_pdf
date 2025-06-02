@@ -25,9 +25,14 @@
 void net_nfet_printing_set_document(uint32_t job,
                                     const uint8_t* doc,
                                     uint64_t size) {
-  [PrintingPlugin setDocumentWithJob:job doc:doc size:size];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [PrintingPlugin setDocumentWithJob:job doc:doc size:size];
+  });
 }
 
 void net_nfet_printing_set_error(uint32_t job, const char* message) {
-  [PrintingPlugin setErrorWithJob:job message:message];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [PrintingPlugin setErrorWithJob:job message:message];
+  });
 }
+
